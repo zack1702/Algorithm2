@@ -1,0 +1,34 @@
+ALGORITHM sumOverlap_algo
+
+VAR
+    setA : ARRAY_OF INTEGER[4];
+    setB : ARRAY_OF INTEGER[4];   
+    i,j,cnt,k : INTEGER := 0; 
+    myhash : HASH_TABLE <INTEGER,INTEGER>; 
+
+BEGIN
+    setA := {12,13,6,10}
+    setB := {13,10,16,15} 
+    myhash := {}
+    Read(setA);
+    Read(setB);
+    Read(myhash);
+
+    FOR i FROM 0 to setA.length-1 STEP 1 DO
+        cnt:=1;
+        FOR j FROM 0 to setB.length-1 STEP 1 DO
+            IF (setB[j]=setA[i]) DO 
+                cnt:=cnt + 1; 
+            END_IF
+        END_FOR
+        IF (cnt > 1) DO
+            myhash.insert(setA[i],cnt)
+        END_IF
+    END_FOR
+
+    FOR k FROM 0 to setA.length-1 STEP 1 DO
+        IF myhash.lookup(setA[k]) =TRUE DO
+            sum := sum + (setA[k] * myhash.get(setA[k]));
+        END_IF
+    END_FOR
+END
